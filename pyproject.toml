@@ -1,0 +1,40 @@
+[project]
+name = "pdm-vscode"
+description = "A PDM plugin that autogenerates workspace vscode settings for you"
+authors = [
+    {name = "Frost Ming", email = "mianghong@gmail.com"},
+]
+dependencies = []
+requires-python = ">=3.7"
+keywords = ["pdm", "plugin"]
+readme = "README.md"
+license = {text = "MIT"}
+dynamic = ["version"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3 :: Only",
+]
+
+[project.urls]
+Homepage = "https://github.com/frostming/pdm-vscode"
+Changelog = "https://github.com/frostming/pdm-vscode/releases"
+
+[project.entry-points.pdm]
+vscode = "pdm_vscode:main"
+
+[tool.pdm]
+version = {source = "scm"}
+
+[tool.pdm.dev-dependencies]
+test = [
+    "pytest>=7.1.2",
+    "pdm>=1.0.0",
+]
+
+[build-system]
+requires = ["pdm-pep517>=0.12.0"]
+build-backend = "pdm.pep517.api"

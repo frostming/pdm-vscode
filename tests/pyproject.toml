@@ -1,0 +1,22 @@
+[project]
+name = "test-pdm"
+version = "0.1.0"
+dependencies = ["requests"]
+
+[project.optional-dependencies]
+socks = ["PySocks"]
+
+[tool.pdm.dev-dependencies]
+test = ["pytest"]
+
+[[tool.pdm.autoexport]]
+filename = "requirements.txt"
+
+[[tool.pdm.autoexport]]
+filename = "requirements-test.txt"
+groups = ["test"]
+without-hashes = true
+
+[[tool.pdm.autoexport]]
+filename = "setup.py"
+format = "setuppy"
