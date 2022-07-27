@@ -8,8 +8,8 @@ from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
     from pathlib import Path
 
-    from pdm import Project
     from pdm.models.python import PythonInfo
+    from pdm.project import Project
 
 
 class VSCodeSettings:

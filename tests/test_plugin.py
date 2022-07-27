@@ -4,7 +4,8 @@ import shutil
 from pathlib import Path
 
 import pytest
-from pdm import Core, Project
+from pdm.core import Core
+from pdm.project import Project
 
 TEMPLATE_PYPROJECT = Path(__file__).parent / "pyproject.toml"
 
