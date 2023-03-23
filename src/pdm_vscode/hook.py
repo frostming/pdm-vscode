@@ -62,10 +62,12 @@ def generate_vscode_settings(
         extra_path = os.path.join("${workspaceFolder}", "__pypackages__", ident, "lib")
         settings.set("python.analysis.extraPaths", [extra_path])
         settings.set("python.autoComplete.extraPaths", [extra_path])
-        python_path = {"PYTHONPATH": extra_path}
+        platform = ""
         if sys.platform.startswith("linux"):
-            settings.set("terminal.integrated.env.linux", python_path)
+            platform = "linux"
         elif sys.platform.startswith("darwin"):
-            settings.set("terminal.integrated.env.osx", python_path)
+            platform = "osx"
         elif sys.platform.startswith("win32"):
-            settings.set("terminal.integrated.env.windows", python_path)
+            platform = "windows"
+        if platform:
+            settings.set(f"terminal.integrated.env.{platform}", {"PYTHONPATH": extra_path})

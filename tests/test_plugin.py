@@ -1,6 +1,7 @@
 import json
 import os
 import shutil
+import sys
 from pathlib import Path
 
 import pytest
@@ -24,9 +25,17 @@ def test_pdm_autoexport(tmp_project: Project):
     extra_path = os.path.join(
         "${workspaceFolder}", "__pypackages__", tmp_project.python.identifier, "lib"
     )
+    terminal_integrated_env_settings = {}
+    if sys.platform.startswith("linux"):
+        terminal_integrated_env_settings = {"terminal.integrated.env.linux": {"PYTHONPATH": extra_path}}
+    elif sys.platform.startswith("darwin"):
+        terminal_integrated_env_settings = {"terminal.integrated.env.osx": {"PYTHONPATH": extra_path}}
+    elif sys.platform.startswith("win32"):
+        terminal_integrated_env_settings = {"terminal.integrated.env.windows": {"PYTHONPATH": extra_path}}
     assert json.loads(settings.read_text()) == {
         "python.analysis.extraPaths": [extra_path],
         "python.autoComplete.extraPaths": [extra_path],
+        **terminal_integrated_env_settings,
     }
     tmp_project.core.main(["venv", "create"], obj=tmp_project)
     if os.name == "nt":
