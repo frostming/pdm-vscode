@@ -3,6 +3,7 @@ from __future__ import annotations
 import contextlib
 import json
 import os
+import sys
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
@@ -51,6 +52,9 @@ def generate_vscode_settings(
         if env.is_global:
             settings.delete("python.analysis.extraPaths")
             settings.delete("python.autoComplete.extraPaths")
+            settings.delete("terminal.integrated.env.linux")
+            settings.delete("terminal.integrated.env.osx")
+            settings.delete("terminal.integrated.env.windows")
             return
         if python is None:
             python = env.interpreter
@@ -58,3 +62,10 @@ def generate_vscode_settings(
         extra_path = os.path.join("${workspaceFolder}", "__pypackages__", ident, "lib")
         settings.set("python.analysis.extraPaths", [extra_path])
         settings.set("python.autoComplete.extraPaths", [extra_path])
+        python_path = {"PYTHONPATH": extra_path}
+        if sys.platform.startswith("linux"):
+            settings.set("terminal.integrated.env.linux", python_path)
+        elif sys.platform.startswith("darwin"):
+            settings.set("terminal.integrated.env.osx", python_path)
+        elif sys.platform.startswith("win32"):
+            settings.set("terminal.integrated.env.windows", python_path)
