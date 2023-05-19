@@ -1,5 +1,7 @@
 # PDM-VSCode
 
+> DEPRECATED: This plugin is no longer considered useful since PEP 582 has been rejected.
+
 ![Github Actions](https://github.com/frostming/pdm-vscode/workflows/Tests/badge.svg)
 [![PyPI](https://img.shields.io/pypi/v/pdm-vscode?logo=python&logoColor=%23cccccc)](https://pypi.org/project/pdm-vscode)
 [![pdm-managed](https://img.shields.io/badge/pdm-managed-blueviolet)](https://pdm.fming.dev)
